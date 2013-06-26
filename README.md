@@ -473,6 +473,32 @@ in the ``pkg-settings`` package.)
 ``hwaf`` ships with ``find_root``, a ``waf`` library to discover, use
 and build against ``ROOT`` libraries.
 
+``find_root`` will try to automatically discover the ``ROOT``
+installation and automatically extract the correct build flags from
+the ``root-config`` script.
+If the system-wide installation of ``ROOT`` isn't suitable for
+whatever reason, you can point ``find_root`` to a specific ``ROOT``
+installation like so:
+```sh
+$ hwaf configure --with-root=/path/to/rootsys
+$ hwaf configure --with-root=/usr
+```
+
+To allow this sort of ``configure`` magic, one usually needs to load
+the ``find_root`` tool in the ``options`` and ``configure`` method of
+someone's ``wscript`` file:
+
+```python
+def options(ctx):
+    ctx.load('find_root')
+
+def configure(ctx):
+    ctx.load('find_root')
+```
+
+Thankfully, this has already been done by the ``pkg-settings`` package
+we retrieved earlier on.
+
 Let's try building a ``Reflex`` dictionary.
 
 First, we need to create a ``C++`` class to use, _e.g._ from
