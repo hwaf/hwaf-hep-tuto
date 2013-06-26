@@ -468,6 +468,102 @@ This could be packaged up in a nice function instead, as was actually
 done for the ``build_linklib`` function (which is defined and exported
 in the ``pkg-settings`` package.)
 
+### build a Reflex dictionary
+
+``hwaf`` ships with ``find_root``, a ``waf`` library to discover, use
+and build against ``ROOT`` libraries.
+
+Let's try building a ``Reflex`` dictionary.
+
+First, we need to create a ``C++`` class to use, _e.g._ from
+``PyROOT``:
+
+```c++
+// src/mytools/mypkg/mypkg/hlv.hh
+#ifndef MYPKG_HLV_HH
+#define MYPKG_HLV_HH 1
+
+#include "CLHEP/Vector/LorentzVector.h"
+
+class MyHlv 
+{
+  CLHEP::HepLorentzVector m_hlv;
+
+public:
+  CLHEP::HepLorentzVector& hlv();
+};
+
+#endif /* !MYPKG_HLV_HH */
+```
+
+```c++
+// src/mytools/mypkg/src/hlv.cxx
+#include "mypkg/hlv.hh"
+
+CLHEP::HepLorentzVector&
+MyHlv::hlv()
+{
+  return m_hlv;
+}
+```
+
+Now, the drudgery to create ``Reflex`` dictionaries: the usual
+``dict.h`` and ``selection.xml`` files...
+
+```c++
+// src/mytools/mypkg/mypkg/mypkgdict.h
+#ifndef MYPKG_MYPKGDICT_H
+#define MYPKG_MYPKGDICT_H 1
+
+#include "mypkg/Hlv.hh"
+
+namespace mypkgdict {
+  struct tmp {
+    MyHlv m_1;
+  };
+}
+#endif
+```
+
+```xml
+<!-- src/mytools/mypkg/mypkg/selection.xml -->
+<lcgdict>
+  <class name="MyHlv" />
+  <class name="CLHEP::HepLorentzVector" />
+</lcgdict>
+```
+
+Finally, to orchestrate the build, add to the ``build`` method of the
+``wscript`` the following:
+```python
+def build(ctx):
+
+    ctx.build_reflex_dict(
+        name     = 'mypkg',
+        source   = 'mypkg/mypkgdict.h',
+        selection_file = 'mypkg/selection.xml',
+        use      = ['hello-clhep', 'Reflex',],
+        )
+```
+
+Rebuild everything which needs to be rebuilt:
+```sh
+$ hwaf
+```
+
+Now, the following should work:
+```sh
+$ hwaf shell
+[hwaf] $ python2
+>>> import PyCintex, ROOT
+>>> h = ROOT.MyHlv()
+>>> h.hlv().px()
+0.0
+>>> h.hlv().setPx(10)
+>>> h.hlv().px()
+10.0
+```
+
 ### Queries
 
 At the moment, a few queries have been implemented:
