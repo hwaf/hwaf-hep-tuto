@@ -4,20 +4,38 @@ hwaf-hep-tuto
 ``hwaf-hep-tuto`` is a simple tutorial to show how to install ``hwaf`` and
 use it, in the context of HEP libraries and applications.
 
-## Installation
+## ``hwaf`` Installation
 
-``hwaf`` is a ``Go`` binary produced by the [Go toolchain](http://golang.org).
-So, if you have already the ``Go`` toolchain installed (see
-[here](http://golang.org/doc/install.html) for instructions) you just have to
-do:
+``hwaf`` is a ``Go`` binary produced by the
+[Go toolchain](http://golang.org).
+If you haven't already a ``Go`` toolchain installed, you may want to
+look [here](http://golang.org/doc/install.html) for the detailed
+instructions.
+But a quick getting started guide could be:
+
+```sh
+# get the Go toolchain
+$ curl -L -O https://code.google.com/go/downloads/....
+# unpack somewhere, say, /usr/local/go
+$ export GOROOT=/usr/local/go
+$ export PATH=$GOROOT/bin:$PATH
+$ which go
+/usr/local/go/bin/go
+
+# setup a development environment
+$ export GOPATH=$HOME/gocode
+$ export PATH=$GOPATH/bin:$PATH
+```
+
+then, you just have to do:
 
 ```sh
 $ go get github.com/hwaf/hwaf
 $ hwaf self init
 ```
 
-to get the latest ``hwaf`` tool (and its ``git`` goodies) installed
-and ready.
+to get the latest ``hwaf`` tool installed (under
+``$GOPATH/src/github.com/hwaf/hwaf``) and ready.
 
 
 Packaged up binaries for ``hwaf`` are also available [here](http://cern.ch/mana-fwk/downloads/tar).
