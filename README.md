@@ -12,8 +12,7 @@ So, if you have already the ``Go`` toolchain installed (see
 do:
 
 ```sh
-$ go get github.com/mana-fwk/git-tools/...
-$ go get github.com/mana-fwk/hwaf
+$ go get github.com/hwaf/hwaf
 $ hwaf self init
 ```
 
@@ -76,13 +75,13 @@ this tutorial:
 
 ```sh
 $ cd work
-$ hwaf pkg co git://github.com/mana-fwk/hwaf-tests-pkg-settings pkg-settings
+$ hwaf pkg co git://github.com/hwaf/hwaf-tests-pkg-settings pkg-settings
 $ hwaf pkg ls
 src/pkg-settings (git)
 
-$ hwaf pkg co git://github.com/mana-fwk/hwaf-tests-pkg-aa pkg-aa
-$ hwaf pkg co git://github.com/mana-fwk/hwaf-tests-pkg-ab pkg-ab
-$ hwaf pkg co git://github.com/mana-fwk/hwaf-tests-pkg-ac pkg-ac
+$ hwaf pkg co git://github.com/hwaf/hwaf-tests-pkg-aa pkg-aa
+$ hwaf pkg co git://github.com/hwaf/hwaf-tests-pkg-ab pkg-ab
+$ hwaf pkg co git://github.com/hwaf/hwaf-tests-pkg-ac pkg-ac
 
 $ hwaf pkg ls
 src/pkg-settings (git)                             
