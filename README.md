@@ -558,7 +558,7 @@ Now, the drudgery to create ``Reflex`` dictionaries: the usual
 #ifndef MYPKG_MYPKGDICT_H
 #define MYPKG_MYPKGDICT_H 1
 
-#include "mypkg/Hlv.hh"
+#include "mypkg/hlv.hh"
 
 namespace mypkgdict {
   struct tmp {
