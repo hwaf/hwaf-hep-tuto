@@ -37,7 +37,7 @@ to get the latest ``hwaf`` tool installed (under
 ``$GOPATH/src/github.com/hwaf/hwaf``) and ready.
 
 
-Packaged up binaries for ``hwaf`` are also available [here](http://cern.ch/mana-fwk/downloads/tar).
+Packaged up binaries for ``hwaf`` are also available [here](http://cern.ch/hwaf/downloads/tar).
 Untar under some directory like so (for linux 64b):
 
 ```sh
